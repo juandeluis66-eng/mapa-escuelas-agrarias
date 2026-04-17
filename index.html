@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Escuelas Agrarias Argentina</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+    }
+
+    header {
+      background: #2e7d32;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .container {
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    #map {
+      height: 500px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>🌱 Escuelas Agrarias en Argentina</h1>
+  <p>Mapa interactivo de instituciones agrotécnicas del país</p>
+</header>
+
+<div class="container">
+  <h2>Ubicación de escuelas</h2>
+  <p>Explorá las principales escuelas agrarias del país en el siguiente mapa interactivo:</p>
+
+  <div id="map"></div>
+</div>
+
+<footer>
+  <p>Datos de ejemplo | Hecho con Leaflet y OpenStreetMap</p>
+</footer>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+  var map = L.map('map').setView([-38.4161, -63.6167], 5);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+
+  var escuelas = [
+    { nombre: "Escuela Agraria Lincoln", lat: -34.8663, lon: -61.53 },
+    { nombre: "Escuela Agraria Madariaga", lat: -37.0015, lon: -57.1357 },
+    { nombre: "Escuela Agrotécnica Casilda", lat: -33.0442, lon: -61.1681 },
+    { nombre: "Agrotécnico Villa María", lat: -32.4075, lon: -63.2402 },
+    { nombre: "Escuela Agrotécnica Salta", lat: -24.7829, lon: -65.4232 }
+  ];
+
+  escuelas.forEach(e => {
+    L.marker([e.lat, e.lon])
+      .addTo(map)
+      .bindPopup("<b>" + e.nombre + "</b>");
+  });
+</script>
+
+</body>
+</html>
